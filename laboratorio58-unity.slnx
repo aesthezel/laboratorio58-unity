@@ -1,0 +1,6 @@
+﻿<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+  </Configurations>
+  <Project Path="Assembly-CSharp.csproj" Type="Classic C#" />
+</Solution>
