@@ -18,6 +18,7 @@ namespace MVVM.Runtime.CharacterSystem.ViewModels
             _characterMessageRouter = ServiceFactory.Instance.Resolve<CharacterMessageRouter>();
             _characterMessageRouter.AddHandler<IsAliveMessage>(AliveReceptor);
             _characterMessageRouter.AddHandler<DamageMessage>(DamageReceptor);
+            _characterMessageRouter.AddHandler<InputMovementMessage>(MovementReceptor);
             
             _characterMessageRouter.RaiseMessage(new HealthChangeMessage(Character.Id, Character.CurrentHealth));
         }
@@ -38,6 +39,12 @@ namespace MVVM.Runtime.CharacterSystem.ViewModels
         {
             if (message.Id != Character.Id) return;
             _characterMessageRouter.RaiseMessage(new PlayAnimationMessage<string>(Character.Id, message.IsAlive ? "Player@Idle" : "Player@Die"));
+        }
+
+        private void MovementReceptor(InputMovementMessage message)
+        {
+            if (message.Id != Character.Id) return;
+            transform.position += message.Movement * Time.deltaTime;
         }
         
         private void OnDestroy()
