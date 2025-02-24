@@ -100,7 +100,7 @@ namespace DeepSeekChat.Editor
             }
             catch (Exception e)
             {
-                throw; // TODO handle exception
+                HandleError(e.Message);
             }
         }
 
